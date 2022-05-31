@@ -1,39 +1,18 @@
-package com.jack.salarymanagement.entities;
+package com.jack.salarymanagement.models;
 
 import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "employee_details")
 public class EmployeeDetails {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
 	private int id;
-	@Column(name = "employeeid", unique = true)
 	private Integer employeeid;
-	@Column(name = "name")
 	private String name;
-	@Column(name = "mail")
 	private String mail;
-	@Column(name = "phno")
 	private String phno;
-	@Column(name = "location")
 	private String location;
-	@Column(name = "pan")
 	private String pan;
-	@Column(name = "bankacc")
 	private String bankacc;
-	@Column(name = "doj")
 	private Date doj;
-	@Column(name = "experience")
 	private int experience;
 
 	public EmployeeDetails() {
@@ -41,7 +20,7 @@ public class EmployeeDetails {
 	}
 
 	public EmployeeDetails(Integer employeeid, String name, String mail, String phno, String location, String pan,
-			String bankacc) {
+			String bankacc, Date doj, int experience) {
 		super();
 		this.employeeid = employeeid;
 		this.name = name;
@@ -50,6 +29,8 @@ public class EmployeeDetails {
 		this.location = location;
 		this.pan = pan;
 		this.bankacc = bankacc;
+		this.doj = doj;
+		this.experience = experience;
 	}
 
 	public int getId() {
