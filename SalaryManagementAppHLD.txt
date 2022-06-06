@@ -1,0 +1,263 @@
+=====Salary-Management-Application=====
+
+===EmployeeDataAccessLayer===
+	AdminLoginTable(PrePopulated)===completed
+		id  ----	(PK)
+		username  ----	(UK)
+		password
+		secretkey
+	EmployeeLoginTable===>should generate empid(business layer) and save in EmployeeDetailsTable,initialize EmployeeAttendanceTable,initialize EmployeeAdminAccessTable with doj 
+		id  ----	(PK)
+		username ---(UK)
+		password
+		employeeid
+	EmployeeDetailsTable(Should be added empId during signup)
+		id  ----	(PK)
+		Employeeid  ----  (UK)
+		name
+		mail
+		location
+		phno
+		pan(encrypt)
+		bankacc(encrypt)
+		DOJ --------------TODO------------------(auto populate)--DONE
+		experience --------------TODO------------------(auto populate)--DONE
+	EmployeeSalaryTable-----------TODO-----------------DONE
+		id ----(PK) 
+		Employeeid 
+		dateofcredit
+		salarycredit	
+	EmployeeAttendanceTable (initialized as soon as new emp joins)===>(Should be added empId during signup)--DONE
+		id ---(PK)
+		Employeeid --- (UK)
+		paidLeaves --- max 22/yearly(should be updated every year to 22)
+		unpaidLeaves --- min 0/monthly(should be updated every month to 0)
+	EmployeeAdminAccessTable(Should be added empId during signup)--DONE
+		id --- (PK)
+		Employeeid --- (UK)
+		doj --> dod(designation set date)
+		designation
+			Programmer Analyst Trainee 
+			Programmer Analyst
+			Assosciate
+			Sr Assosciate
+			Manager
+			Sr Manager
+			Business Lead
+		
+	EmployeeSalaryBreakDownTable(PrePopulated) === COMPLETED
+	id		designation				basic  increment  rent	conveyance	medical	special	bonus	wfh	
+	1	Programmer Analyst Trainee	5k		5			7k		800		1k		9k		2k		1800
+	2	Programmer Analyst			10k		5.5			8k		1k		1.2k	10k		2.5k	2k
+	3	Assosciate					15k		6			9k		1.5k	1.4k	11k		3k		2.2k
+	4	Sr Assosciate				20k		6.5			10k		2k		1.5k	12k		3.5k	2.4k
+	5	Manager						25k		7			11k		2.5k	2k		13k		4k		2.6k
+	6	Sr Manager					30k		7.5			12k		3k		2.2k	14k		4.5k	2.8k	
+	7	Business Lead				35k		8			13k		3.3k	2.5k	15k		5k		3k
+	
+	
+TODO:18TH MAY
+EmployeeAdminAccessTable : add doj in object before saving in EmployeeLoginService.java --DONE
+Move some files from DB layer to business layer -DONE
+
+--Enhancement--
+1.Encrypt data in DB layer
+===================================================================================================
+
+
+===EmployeeSalaryBusinessLayer===
+1.should validate admin and employee while login===>ValidateService.java---DONE
+
+2.should calculate salary according to the paid leaves and unpaid leaves===>CalculateSalaryService.java--DONE
+	if designation == ??
+		salary = (basic + rent + conveyance + medical + special + bonus + wfh)
+		for (years of experience as per designation)[current date - last designation set date]
+			salary = salary + ((salary * increment)%100)
+	TODO:23RD MAY
+	calculate experience --DONE
+	remaning functionality of calc salary -- DONE
+
+3.should adjust paid or unpaid leaves according to the attendance===>AttendanceMaintainance.java
+	TODO:
+	Update unpaid leaves when salary generates -- DONE
+	Update paid leaves every year -- DONE
+
+4.should validate employee details===>EmployeeSevice.java>>should add some code from validateService.java--DONE
+
+5.admin should set the designation===>AdminService.java>>>should set the designation and dod --DONE
+
+
+--Enhancement--
+MAILS:
+1.After signup of employee, empid should mail
+2.After generating empid, admin should get mail to set the designation of new employee
+3.After designation set employee should get mail regarding designation
+
+=========================================================================================================
+
+===EmployeeWebLayer===
+HomePage
+	LoginOrSignUpPage(EmployeeLoginTable)(EmployeeSalaryBusinessLayer.1)
+		EmployeeDetailPage(EmployeeDetailsTable)(EmployeeSalaryBusinessLayer.4)
+		EmployeeAttendanceOrLeavePage(EmployeeAttendanceTable)(EmployeeSalaryBusinessLayer.3)
+		EmployeePaySlipPage(EmployeeSalaryTable)(EmployeeSalaryBusinessLayer.2)
+	AdminPage(AdminLoginTable)(EmployeeSalaryBusinessLayer.1)
+		AdminAccessPage(EmployeeAdminAccessTable)(EmployeeSalaryBusinessLayer.5)
+			GenerateSalary
+			
+	TODO:
+	Create index.html page and connect to controller... -- DONE
+
+
+PAGE_NAMES:
+index.html
+	employee
+		signupbutton>>>signup.html
+					submitbutton
+						TRUE-employeehome.html
+							employeeDetailsbutton>>>details.html
+												submitbutton
+													TRUE-details.html with msg
+													FALSE-details.html with err msg
+												GoToHomebutton>>>employeehome.html
+							generatePaySlipbutton>>>payslip.html
+							applyLeavebutton>>>employeehome.html with message
+		loginbutton>>>login.html>>>
+					submitbutton
+						TRUE-employeehome.html
+							employeeDetailsbutton>>>details.html
+												submitbutton
+													TRUE-details.html with msg
+													FALSE-details.html with err msg
+												GoToHomebutton>>>employeehome.html
+							generatePaySlipbutton>>>payslip.html
+							applyLeavebutton>>>employeehome.html with message
+						FALSE-signup.html with err msg
+	admin
+		loginbutton>>>login-admin.html>>>
+					submitbutton
+						TRUE-adminhome.html
+							setDesignationButton>>>adminhome.html
+							generateSalarybutton>>>adminhome.html
+						FALSE-login.html with err msg
+	
+TODO:
+generatePaySlipbutton>>>payslip.html	
+Need to add StringConstants.java --DONE
+
+============================================================================================
+
+URL_NAMES:
+HomePage
+	Employee
+		employeeSignupButton>>>/employee/signup>>>on submit - /employee/dosignup - saveEmployeeLoginDetails
+			from DB layer:
+				fetch employeeLoginDetails(username) - TRUE - DONE
+				fetch employeeIds - TRUE - DONE
+				saveEmployeeAlongwithOtherDetails - TRUE - DONE
+					After EmployeeSignup >>> open Employee HomePage
+						>>>GeneartePaySlip
+						>>>EmployeeDetails>>>/employee/details>>>on submit - /employee/dosavedetails - saveEmployeeDetails
+							from DB layer:
+								fetch employeedetails(employeeid)--useGlobalEmployeeId - TRUE - DONE
+								saveEmployeeDetails - TRUE - DONE
+						>>>EmployeeLeave>>>/employee/leave>>>on submit - /employee/applyleave - applyLeave
+							from DB layer:
+								fetch employeeAttendance(employeeid) - TRUE - DONE
+								saveEmployeeAttendance - TRUE - DONE
+
+		
+		employeeLoginButton>>>/employee/login>>>on submit - /employee/dologin - isValidEmployeeWithMessage
+		from DB layer:
+			fetch employeeLoginDetails(username) - TRUE - DONE
+				After EmployeeLogin >>> open Employee HomePage
+					>>>GeneartePaySlip
+						>>>EmployeeDetails>>>/employee/details>>>on submit - /employee/dosavedetails - saveEmployeeDetails
+							from DB layer:
+								fetch employeedetails(employeeid)--useGlobalEmployeeId - TRUE - DONE
+								saveEmployeeDetails - TRUE - DONE
+						>>>EmployeeLeave>>>/employee/leave>>>on submit - /employee/applyleave - applyLeave
+							from DB layer:
+								fetch employeeAttendance(employeeid) - TRUE - DONE
+								saveEmployeeAttendance - TRUE - DONE
+		
+	Admin
+		adminLoginButton>>>/admin/login>>>on submit - /admin/dologin - isValidAdminWithMessage
+		from DB layer:
+			fetch adminLoginDetails(username) - TRUE - DONE
+				After AdminLogin >>> open Admin HomePage
+				Enter employeeid
+					>>>EmployeeDesignation>>>/admin/designation>>>on submit - /admin/setdesignation - saveAdminAccessDetails
+						from DB layer:
+							fetch employeeadminaccess(employeeid) - TRUE - DONE
+							saveEmployeeAdminAccess - TRUE - DONE
+					>>>CalculateSalary>>>/admin/salary>>>on submit - /admin/calculatesalary - calculateSalary
+						from DB layer:
+							fetch EmployeeAdminAccess(employeeid) - TRUE - DONE
+							fetch EmployeeSalaryBreakDown(designation) - TRUE - DONE
+							fetchh EmployeeAttendance(employeeid) - TRUE - DONE
+							saveEmployeeSalary() - TRUE - DONE
+						updateUnpaidLeaves
+							from DB layer:
+								saveEmployeeAttendance - TRUE - DONE
+						updatePaidLeaves
+							from DB layer:
+								fetch EmployeeDetails(employeeid) - TRUE - DONE
+								saveEmployeeAttendance - TRUE - DONE
+								saveEmployeeDetails - TRUE - DONE
+								
+								
+======================================================================================================
+
+OpenFeign
+https://javatodev.com/consuming-rest-api-using-feign-client-in-spring-boot/
+
+https://www.devglan.com/spring-cloud/spring-cloud-feign-example
+
+
+SQL startup initialization
+https://www.youtube.com/watch?v=24rI86xLhXA&t=214s
+
+======================================================================================================
+
+Encrypt Sensitive Data
+@Component
+public class AttributeEncryptor implements AttributeConverter<String, String> {
+
+    private static final String AES = "AES";
+    private static final String SECRET = "secret-key-12345";
+
+    private final Key key;
+    private final Cipher cipher;
+
+    public AttributeEncryptor() throws Exception {
+        key = new SecretKeySpec(SECRET.getBytes(), AES);
+        cipher = Cipher.getInstance(AES);
+    }
+
+    @Override
+    public String convertToDatabaseColumn(String attribute) {
+        try {
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+            return Base64.getEncoder().encodeToString(cipher.doFinal(attribute.getBytes()));
+        } catch (IllegalBlockSizeException | BadPaddingException | InvalidKeyException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    @Override
+    public String convertToEntityAttribute(String dbData) {
+        try {
+            cipher.init(Cipher.DECRYPT_MODE, key);
+            return new String(cipher.doFinal(Base64.getDecoder().decode(dbData)));
+        } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+}
+
+
+@Convert(converter = AttributeEncryptor.class)
+    private String name;
+
+=================================================================================================================
