@@ -69,9 +69,15 @@
 				<div class="jumbo" style="margin-top: 10%; color: white;">
 					<h1 class="display-5">Apply leave for today.</h1>
 					<p class="lead" style="margin-top: 6%;">Maximum Paid Leaves per year is 22.</p>
-					<a class="btn btn-outline-light btn-lg" href="http://localhost:8080/doapplyleave" role="button" style="margin-top: 10%;">
-						Apply Leave
-					</a>
+					<form th:action="@{/doapplyleave}" method="post">
+					<button type="submit" class="btn btn-outline-light btn-lg">Apply Leave</button>			
+					<!-- Alert message start-->
+   					<div th:if="${session.message}" th:classappend="${session.condition=='true'}?alert-success:alert-danger" class="alert alert-success" role="alert">
+   						<p th:text="${session.message}"></p>
+   						<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+   					</div> 
+   					<!-- Alert message end-->
+				</form>
 				</div>
 				<!--  Leave End -->
 			</div>

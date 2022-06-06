@@ -3,6 +3,8 @@ package com.jack.salarymanagement.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jack.salarymanagement.models.AdminLogin;
 import com.jack.salarymanagement.models.EmployeeAdminAccess;
+import com.jack.salarymanagement.pojo.ReturnMessage;
 import com.jack.salarymanagement.utilities.StringConstants;
 
 @Controller
@@ -39,10 +42,23 @@ public class SalaryManagementAdminController {
 	}
 	
 	@PostMapping("/dologinadmin")
-	public String doLogin(@ModelAttribute AdminLogin aLogin)
+	public String doLogin(@ModelAttribute AdminLogin aLogin,HttpSession session)
 	{
-		System.out.println(aLogin);
-		return "redirect:/adminhome";
+		//send aLogin to BuesinessLayer
+		ReturnMessage returnMessage = new ReturnMessage();
+		String returnPage = null;
+		
+		if(returnMessage.isValid())
+		{
+			returnPage = "redirect:/adminhome";
+		}
+		else
+		{
+			session.setAttribute("condition", returnMessage.isValid());
+			session.setAttribute("message", StringConstants.ERROR_LOGIN);
+			returnPage = "redirect:/loginadmin";
+		}
+		return returnPage;
 	}
 	
 	@GetMapping("/adminhome")
@@ -54,16 +70,46 @@ public class SalaryManagementAdminController {
 	}
 	
 	@PostMapping("/dodesignation")
-	public String doDesignation(@ModelAttribute EmployeeAdminAccess eAccess)
+	public String doDesignation(@ModelAttribute EmployeeAdminAccess eAccess,HttpSession session)
 	{
-		System.out.println(eAccess);
-		return "redirect:/adminhome";
+		//send eAccess to BusinessLayer
+		ReturnMessage returnMessage = new ReturnMessage();
+		String returnPage = null;
+		
+		if(returnMessage.isValid())
+		{
+			session.setAttribute("condition", returnMessage.isValid());
+			session.setAttribute("message", returnMessage.getMessage());
+			returnPage = "redirect:/adminhome";
+		}
+		else
+		{
+			session.setAttribute("condition", returnMessage.isValid());
+			session.setAttribute("message", returnMessage.getMessage());
+			returnPage = "redirect:/adminhome";
+		}
+		return returnPage;
 	}
 	
 	@PostMapping("/docalculatesalary")
-	public String doCalculateSalary(@RequestParam Integer employeeid)
+	public String doCalculateSalary(@RequestParam Integer employeeid,HttpSession session)
 	{
-		System.out.println(employeeid);
-		return "redirect:/adminhome";
+		//send employeeid to BusinessLayer
+		ReturnMessage returnMessage = new ReturnMessage();
+		String returnPage = null;
+		
+		if(returnMessage.isValid())
+		{
+			session.setAttribute("condition", returnMessage.isValid());
+			session.setAttribute("message", returnMessage.getMessage());
+			returnPage = "redirect:/adminhome";
+		}
+		else
+		{
+			session.setAttribute("condition", returnMessage.isValid());
+			session.setAttribute("message", returnMessage.getMessage());
+			returnPage = "redirect:/adminhome";
+		}
+		return returnPage;
 	}
 }

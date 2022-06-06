@@ -60,6 +60,12 @@
 					 </select>
 					</div>
 					<button type="submit" class="btn btn-outline-light btn-lg">Set Designation</button>			
+					<!-- Alert message start-->
+   					<div th:if="${session.message}" th:classappend="${session.condition=='true'}?alert-success:alert-danger" class="alert alert-success" role="alert">
+   						<p th:text="${session.message}"></p>
+   						<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+   					</div> 
+   					<!-- Alert message end-->
 				</form>					
 				</div>
 				<!--  Designation End -->
@@ -73,6 +79,12 @@
 					 <input type="text" class="form-control" id="employeeid" placeholder="Enter employee id" th:name="employeeid">
 					</div>
 					<button type="submit" class="btn btn-outline-light btn-lg">Generate Salary</button>			
+					<!-- Alert message start-->
+   					<div th:if="${session.message}" th:classappend="${session.condition=='true'}?alert-success:alert-danger" class="alert alert-success" role="alert">
+   						<p th:text="${session.message}"></p>
+   						<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+   					</div> 
+   					<!-- Alert message end-->
 				</form>	
 				</div>
 				<!--  Salary End -->

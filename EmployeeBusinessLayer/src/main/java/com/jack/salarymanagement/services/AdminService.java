@@ -3,15 +3,20 @@ package com.jack.salarymanagement.services;
 import java.sql.Date;
 import java.time.LocalDate;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.jack.salarymanagement.models.EmployeeAdminAccess;
 import com.jack.salarymanagement.pojo.ReturnMessage;
+import com.jack.salarymanagement.utilities.StringConstants;
 
 @Service
 public class AdminService {
 
+	@Autowired
+	private ReturnMessage returnMessage;
+	
 	private EmployeeAdminAccess detailsFromDB;
 	
 	@SuppressWarnings("deprecation")
@@ -27,17 +32,20 @@ public class AdminService {
 				
 				// Call DB layer to save detailsFromDB
 				//...
+				
+				returnMessage.setValid(true);
+				returnMessage.setMessage(StringConstants.SAVED_TO_DB);
 			}
 			else 
 			{
-				// Should return message details doesn't exist
+				returnMessage.setValid(false);
+				returnMessage.setMessage(StringConstants.DETAILS_NOT_FOUND);
 			}
 		}
 		catch (Exception e) {
-			
+			//log-message
 		}
-		// Should change to return message
-		return null;
+		return returnMessage;
 	}
 	
 	private void populateAdminAccess(EmployeeAdminAccess employeeAdminAccess)

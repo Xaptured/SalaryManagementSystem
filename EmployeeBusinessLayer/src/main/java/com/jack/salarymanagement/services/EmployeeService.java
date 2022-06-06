@@ -53,12 +53,8 @@ public class EmployeeService {
 				returnMessage.setValid(true);
 				returnMessage.setMessage(StringConstants.SAVED_TO_DB);
 			} else {
-				// Should call DB layer -- "Should not update table"
-
-				//updateEmployee(employeeLogin);
-
 				returnMessage.setValid(false);
-				returnMessage.setMessage(StringConstants.UPDATED_TO_DB);
+				returnMessage.setMessage(StringConstants.NOT_SAVED_TO_DB);
 			}
 		} catch (Exception e) {
 			// log-message
@@ -80,22 +76,26 @@ public class EmployeeService {
 					
 					// Call DB layer to save detailsFromDB
 					//...
+					
+					returnMessage.setValid(true);
+					returnMessage.setMessage(StringConstants.SAVED_TO_DB);
 				}
 				else
 				{
-					//Should return message invalid details
+					returnMessage.setValid(false);
+					returnMessage.setMessage(StringConstants.INVALID_DETAILS);
 				}
 			}
 			else
 			{
-				// Should return message no record found
+				returnMessage.setValid(false);
+				returnMessage.setMessage(StringConstants.DETAILS_NOT_FOUND);
 			}
 		} 
 		catch (Exception e) {
-			// TODO: handle exception
+			//log-message
 		}
-		// Change the return object
-		return null;
+		return returnMessage;
 	}
 	
 	private void populateEmployeeDetailDB(EmployeeDetails employeeDetails)

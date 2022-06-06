@@ -1,5 +1,7 @@
 package com.jack.salarymanagement.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -7,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.jack.salarymanagement.models.EmployeeDetails;
 import com.jack.salarymanagement.models.EmployeeLogin;
+import com.jack.salarymanagement.pojo.ReturnMessage;
+import com.jack.salarymanagement.utilities.StringConstants;
 
 @Controller
 public class SalaryManagementEmployeeController {
@@ -18,10 +22,23 @@ public class SalaryManagementEmployeeController {
 	}
 	
 	@PostMapping("/dosignup")
-	public String doSignUp(@ModelAttribute EmployeeLogin eLogin)
+	public String doSignUp(@ModelAttribute EmployeeLogin eLogin,HttpSession session)
 	{
-		System.out.println(eLogin);
-		return "redirect:/employeehome";
+		//send eLogin to BusinessLayer
+		ReturnMessage returnMessage = new ReturnMessage();
+		String returnPage = null;
+		
+		if(returnMessage.isValid())
+		{
+			returnPage = "redirect:/employeehome";
+		}
+		else
+		{
+			session.setAttribute("condition", returnMessage.isValid());
+			session.setAttribute("message", StringConstants.ERROR_SIGNUP);
+			returnPage = "redirect:/signup";
+		}
+		return returnPage;
 	}
 	
 	@GetMapping("/login")
@@ -31,10 +48,31 @@ public class SalaryManagementEmployeeController {
 	}
 	
 	@PostMapping("/dologin")
-	public String doLogin(@ModelAttribute EmployeeLogin eLogin)
+	public String doLogin(@ModelAttribute EmployeeLogin eLogin,HttpSession session)
 	{
-		System.out.println(eLogin);
-		return "redirect:/employeehome";
+		//send eLogin to BusinessLayer
+		ReturnMessage returnMessage = new ReturnMessage();
+		String returnPage = null;
+		
+		if(returnMessage.isValid())
+		{
+			returnPage = "redirect:/employeehome";
+		}
+		else
+		{
+			if(returnMessage.getMessage().equals(StringConstants.INVALID_EMPLOYEE))
+			{
+				session.setAttribute("condition", returnMessage.isValid());
+				session.setAttribute("message", StringConstants.INVALID_CREDENTIALS);
+			}
+			else if(returnMessage.getMessage().equals(StringConstants.EMPLOYEE_NOT_FOUND))
+			{
+				session.setAttribute("condition", returnMessage.isValid());
+				session.setAttribute("message", StringConstants.RECORD_NOT_FOUND);
+			}		
+			returnPage = "redirect:/login";
+		}
+		return returnPage;
 	}
 	
 	@GetMapping("/details")
@@ -44,17 +82,45 @@ public class SalaryManagementEmployeeController {
 	}
 	
 	@PostMapping("/dodetailssubmit")
-	public String doDetailsSubmit(@ModelAttribute EmployeeDetails details)
+	public String doDetailsSubmit(@ModelAttribute EmployeeDetails details,HttpSession session)
 	{
-		System.out.println(details);
-		return "redirect:/employeehome";
+		//send details to BuesinessLayer
+		ReturnMessage returnMessage = new ReturnMessage();
+		String returnPage = null;
+		
+		if(returnMessage.isValid())
+		{
+			returnPage = "redirect:/employeehome";
+		}
+		else
+		{
+			session.setAttribute("condition", returnMessage.isValid());
+			session.setAttribute("message", StringConstants.INVALID_DETAILS);
+			returnPage = "redirect:/details";
+		}
+		return returnPage;
 	}
 	
-	@GetMapping("/doapplyleave")
-	public String doApplyLeave()
+	@PostMapping("/doapplyleave")
+	public String doApplyLeave(HttpSession session)
 	{
-		System.out.println("Do redirect");
-		return "redirect:/employeehome";
+		//call BusinessLayer
+		ReturnMessage returnMessage = new ReturnMessage();
+		String returnPage = null;
+		
+		if(returnMessage.isValid())
+		{
+			session.setAttribute("condition", returnMessage.isValid());
+			session.setAttribute("message", returnMessage.getMessage());
+			returnPage = "redirect:/employeehome";		
+		}
+		else
+		{
+			session.setAttribute("condition", returnMessage.isValid());
+			session.setAttribute("message", returnMessage.getMessage());
+			returnPage = "redirect:/employeehome";
+		}
+		return returnPage;
 	}
 	
 	@GetMapping("/employeehome")

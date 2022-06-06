@@ -11,6 +11,7 @@ import com.jack.salarymanagement.models.EmployeeAdminAccess;
 import com.jack.salarymanagement.models.EmployeeAttendance;
 import com.jack.salarymanagement.models.EmployeeSalary;
 import com.jack.salarymanagement.models.EmployeeSalaryBreakDown;
+import com.jack.salarymanagement.pojo.ReturnMessage;
 import com.jack.salarymanagement.utilities.StringConstants;
 
 @Service
@@ -20,6 +21,8 @@ public class CalculateSalaryService {
 	private AttendanceService attendanceService;
 	@Autowired
 	private EmployeeSalary eSalary;
+	@Autowired
+	private ReturnMessage returnMessage;
 	
 	private EmployeeAdminAccess eAdminAccess;
 	private EmployeeSalaryBreakDown eSalaryBreakDown;
@@ -27,7 +30,7 @@ public class CalculateSalaryService {
 	private double salary;
 	private int experienceInYears;
 
-	public void calculateSalary(Integer employeeid) 
+	public ReturnMessage calculateSalary(Integer employeeid) 
 	{
 		try {
 			// Call DB layer
@@ -85,10 +88,16 @@ public class CalculateSalaryService {
 			
 			attendanceService.updateUnpaidLeaves(eAttendance);
 			attendanceService.updatePaidLeaves(eAttendance);
+			
+			returnMessage.setValid(true);
+			returnMessage.setMessage(StringConstants.SALARY_CALCULATED);
 
 		} catch (Exception e) {
-
+			returnMessage.setValid(false);
+			returnMessage.setMessage(StringConstants.SALARY_NOT_CALCULATED);
+			//log-message
 		}
+		return returnMessage;
 	}
 	
 	private void populateEmployeeSalary(Integer employeeid)

@@ -81,7 +81,6 @@ public class EmployeeLoginService implements EmployeeLoginDataAccessUtilities{
 			eAttendanceUtilities.savEmployeeAttendance(eAttendance);
 		} catch (Exception e) {
 			// log-message
-			System.out.println(e.getMessage());
 		}
 	}
 	

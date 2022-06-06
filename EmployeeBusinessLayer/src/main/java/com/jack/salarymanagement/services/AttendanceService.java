@@ -4,47 +4,74 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.jack.salarymanagement.models.EmployeeAttendance;
 import com.jack.salarymanagement.models.EmployeeDetails;
+import com.jack.salarymanagement.pojo.ReturnMessage;
+import com.jack.salarymanagement.utilities.StringConstants;
 
 @Service
 public class AttendanceService {
 
+	@Autowired
+	private ReturnMessage returnMessage;
+	@SuppressWarnings("unused")
+	private Integer globalEmployeeId;
+	
 	private EmployeeAttendance eAttendance;
 	private EmployeeDetails eDetails;
-	private Integer globalEmployeeId;
 	
 	public void setGlobalEmployeeId(Integer globalEmployeeId)
 	{
 		this.globalEmployeeId = globalEmployeeId;
 	}
 	
-	public void applyLeave()
+	@SuppressWarnings("deprecation")
+	public ReturnMessage applyLeave()
 	{
 		//Call DB layer
 		eAttendance = new EmployeeAttendance();
 		int updatedLeaves;
 		
-		if(eAttendance.getPaidleaves()>0)
-		{
-			updatedLeaves = eAttendance.getPaidleaves();
-			updatedLeaves = updatedLeaves-1;
-			eAttendance.setPaidleaves(updatedLeaves);
-			
-			//Call DB layer to save eAttendance
-			//...
+		try {
+			if(!StringUtils.isEmpty(eAttendance))
+			{
+				if(eAttendance.getPaidleaves()>0)
+				{
+					updatedLeaves = eAttendance.getPaidleaves();
+					updatedLeaves = updatedLeaves-1;
+					eAttendance.setPaidleaves(updatedLeaves);
+					
+					//Call DB layer to save eAttendance
+					//...
+					
+					returnMessage.setValid(true);
+					returnMessage.setMessage(StringConstants.SUCCESSFUL_PAID_LEAVES);
+				}
+				else 
+				{
+					updatedLeaves = eAttendance.getUnpaidleaves();
+					updatedLeaves = updatedLeaves+1;
+					eAttendance.setUnpaidleaves(updatedLeaves);
+					
+					//Call DB layer to save eAttendance
+					//...
+					
+					returnMessage.setValid(true);
+					returnMessage.setMessage(StringConstants.SUCCESSFUL_UNPAID_LEAVES);
+				}
+			}
+			else {
+				returnMessage.setValid(false);
+				returnMessage.setMessage(StringConstants.DETAILS_NOT_FOUND);
+			}
+		} catch (Exception e) {
+			// log-message
 		}
-		else 
-		{
-			updatedLeaves = eAttendance.getUnpaidleaves();
-			updatedLeaves = updatedLeaves+1;
-			eAttendance.setUnpaidleaves(updatedLeaves);
-			
-			//Call DB layer to save eAttendance
-			//...
-		}
+		return returnMessage;
 	}
 	
 	public void updateUnpaidLeaves(EmployeeAttendance employeeAttendance)
