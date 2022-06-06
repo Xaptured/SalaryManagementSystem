@@ -1,34 +1,10 @@
-package com.jack.salarymanagement.entities;
+package com.jack.salarymanagement.models;
 
-import java.io.Serializable;
+public class EmployeeAttendance {
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
-@SuppressWarnings("serial")
-@Entity
-@Component
-@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-@Table(name = "employee_attendance")
-public class EmployeeAttendance implements Serializable {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
 	private int id;
-	@Column(name = "employeeid", unique = true)
 	private Integer employeeid;
-	@Column(name = "paidleaves")
 	private int paidleaves;
-	@Column(name = "unpaidleaves")
 	private int unpaidleaves;
 
 	public EmployeeAttendance() {

@@ -14,8 +14,14 @@ public class AttendanceService {
 
 	private EmployeeAttendance eAttendance;
 	private EmployeeDetails eDetails;
+	private Integer globalEmployeeId;
 	
-	public void applyLeave(Integer employeeid)
+	public void setGlobalEmployeeId(Integer globalEmployeeId)
+	{
+		this.globalEmployeeId = globalEmployeeId;
+	}
+	
+	public void applyLeave()
 	{
 		//Call DB layer
 		eAttendance = new EmployeeAttendance();

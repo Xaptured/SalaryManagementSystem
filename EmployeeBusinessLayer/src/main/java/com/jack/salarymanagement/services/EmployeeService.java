@@ -24,8 +24,11 @@ public class EmployeeService {
 	private ReturnMessage returnMessage;
 	@Autowired
 	private ValidateService validateService;
+	@Autowired
+	private AttendanceService aService;
 	
 	private EmployeeDetails detailsFromDB;
+	private Integer globalEmployeeId;
 	
 	@SuppressWarnings("deprecation")
 	public ReturnMessage saveEmployeeLoginDetails(EmployeeLogin employeeLogin) {
@@ -41,7 +44,9 @@ public class EmployeeService {
 				generateID.setEmployeeIdSet(employeeSet);
 				Integer employeeID = generateID.GenerateID();
 				employeeLogin.setEmployeeid(employeeID);
-
+				globalEmployeeId = employeeID;
+				aService.setGlobalEmployeeId(globalEmployeeId);
+				
 				// Should call DB layer
 				//saveEmployee(employeeLogin);
 
@@ -66,7 +71,7 @@ public class EmployeeService {
 	{
 		try {
 			//Should call DB layer
-			detailsFromDB = new EmployeeDetails();
+			EmployeeDetails detailsFromDB = new EmployeeDetails();
 			if (!StringUtils.isEmpty(detailsFromDB)) 
 			{
 				if(validateService.validateEmployeeDetails(employeeDetails))

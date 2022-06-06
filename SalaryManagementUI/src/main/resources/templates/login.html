@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<title>Salary Management App</title>
+</head>
+<body style="background-image: url(images/background.jpg);">
+
+	<!-- Navbar Start -->
+	<nav class="navbar navbar-expand-lg navbar-light">
+		<div class="container-fluid">
+			<span class="navbar-brand mb-0 h1" style="color: white;">Salary Management</span>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+				aria-controls="navbarNavDropdown" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="http://localhost:8080/" style="color: white;">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="http://localhost:8080/login" style="color: white;">Employee</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="http://localhost:8080/loginadmin" style="color: white;">Admin</a></li>
+					<li class="nav-item"><a class="nav-link" href="#" style="color: white;">Contact Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- Navbar End -->
+	<!-- Form Start -->
+    <div class="container p-2" style="margin-top: 3%;">
+    	<div class="row">
+    		<div class="col-md-6 offset-md-3">
+    			<div class="card" style="width: 85%; margin-left: 5% ">
+    				<div class="card-body">
+    					<h1 class="display-5" style="margin-bottom: 7%;">Login</h1>
+    					<!-- Alert message start-->
+    					<div th:if="${session.message}" th:classappend="${session.condition=='true'}?alert-success:alert-danger" class="alert alert-success" role="alert">
+    						<p th:text="${session.message}"></p>
+    						<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+    					</div> 
+    					<!-- Alert message end-->
+    					<form th:action="@{/dologin}" th:object="${eLogin}" method=post>
+						  <div class="mb-4">
+						    <label for="username" class="form-label">User Name</label>
+						    <input type="text" class="form-control" placeholder="Enter User Name" name="username" id="username">
+						  </div>
+						  <div class="mb-4">
+						    <label for="password" class="form-label">Password</label>
+						    <input type="password" class="form-control" placeholder="Enter Game Abbreviation" name="password" id="password">
+						  </div>
+						  <div class="mb-3">
+							  <button type="submit" class="btn btn-primary">Login</button>
+							  <input class="btn btn-primary" type="reset" value="Reset">
+						  </div>
+						</form>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    <!-- Form End -->
+	<!--  Footer Start -->
+	 <div class="footer-basic">
+        <footer>
+            <div class="social">
+	            <a href="#"><i class="icon ion-social-instagram"></i></a>
+	            <a href="#"><i class="icon ion-social-snapchat"></i></a>
+	            <a href="#"><i class="icon ion-social-twitter"></i></a>
+	            <a href="#"><i class="icon ion-social-facebook"></i></a>
+            </div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+            <p class="copyright">Jack © 2022</p>
+        </footer>
+    </div>
+	<!--  Footer End -->
+
+	<!-- Optional JavaScript; choose one of the two! -->
+
+	<!-- Option 1: Bootstrap Bundle with Popper -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+	<!-- Option 2: Separate Popper and Bootstrap JS -->
+	<!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+</body>
+</html>
