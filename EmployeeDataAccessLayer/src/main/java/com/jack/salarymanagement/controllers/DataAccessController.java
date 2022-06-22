@@ -30,7 +30,6 @@ public class DataAccessController {
 	@PostMapping("/submitsignup")
 	public String signupOnSubmit(@ModelAttribute EmployeeLogin eLogin)
 	{
-		eLogin.setEmployeeid(1);
 		eLoginService.saveEmployeeSignupDetails(eLogin);
 		return "redirect:/";
 	}

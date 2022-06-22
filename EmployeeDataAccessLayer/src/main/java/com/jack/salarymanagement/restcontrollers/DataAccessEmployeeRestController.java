@@ -61,6 +61,7 @@ public class DataAccessEmployeeRestController {
 	@PostMapping("/details")
 	public void saveEmployeeDetails(@RequestBody EmployeeDetails eDetails)
 	{
+		System.out.println(eDetails);
 		eDetailsServie.saveEmployeeDetails(eDetails);
 	}
 	

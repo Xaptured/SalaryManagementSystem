@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.jack.salarymanagement.client.AdminClient;
 import com.jack.salarymanagement.models.EmployeeAdminAccess;
 import com.jack.salarymanagement.pojo.ReturnMessage;
 import com.jack.salarymanagement.utilities.StringConstants;
@@ -16,6 +17,8 @@ public class AdminService {
 
 	@Autowired
 	private ReturnMessage returnMessage;
+	@Autowired
+	private AdminClient aClient;
 	
 	private EmployeeAdminAccess detailsFromDB;
 	
@@ -23,15 +26,13 @@ public class AdminService {
 	public ReturnMessage saveAdminAccessDetails(EmployeeAdminAccess eAdminAccess)
 	{
 		try {
-			// Should call DB layer
-			detailsFromDB = new EmployeeAdminAccess();
+			detailsFromDB = aClient.getAdminAccessById(eAdminAccess.getEmployeeid());
 			
 			if(!StringUtils.isEmpty(detailsFromDB))
 			{
 				populateAdminAccess(eAdminAccess);
 				
-				// Call DB layer to save detailsFromDB
-				//...
+				aClient.saveAdminAccess(detailsFromDB);
 				
 				returnMessage.setValid(true);
 				returnMessage.setMessage(StringConstants.SAVED_TO_DB);

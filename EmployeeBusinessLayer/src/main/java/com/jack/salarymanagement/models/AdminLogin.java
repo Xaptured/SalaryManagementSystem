@@ -1,5 +1,8 @@
 package com.jack.salarymanagement.models;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class AdminLogin {
 
 	private int id;

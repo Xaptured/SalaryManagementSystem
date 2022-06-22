@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 public class GenerateEmployeeID {
 
 	private Set<Integer> employeeIdSet;
-	private boolean condition = true;
 	private int randomNumber;
 
 	public Set<Integer> getEmployeeIdSet() {
@@ -21,7 +20,7 @@ public class GenerateEmployeeID {
 		this.employeeIdSet = employeeIdSet;
 	}
 
-	public int GenerateID() {
+	public int GenerateID(boolean condition) {
 		Random randomObj = new Random();
 		while (condition) {
 			randomNumber = randomObj.nextInt(1000);

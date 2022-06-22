@@ -7,6 +7,7 @@ import java.time.Period;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jack.salarymanagement.client.AdminClient;
 import com.jack.salarymanagement.models.EmployeeAdminAccess;
 import com.jack.salarymanagement.models.EmployeeAttendance;
 import com.jack.salarymanagement.models.EmployeeSalary;
@@ -23,6 +24,8 @@ public class CalculateSalaryService {
 	private EmployeeSalary eSalary;
 	@Autowired
 	private ReturnMessage returnMessage;
+	@Autowired
+	private AdminClient aClient;
 	
 	private EmployeeAdminAccess eAdminAccess;
 	private EmployeeSalaryBreakDown eSalaryBreakDown;
@@ -33,12 +36,9 @@ public class CalculateSalaryService {
 	public ReturnMessage calculateSalary(Integer employeeid) 
 	{
 		try {
-			// Call DB layer
-			eAdminAccess = new EmployeeAdminAccess();
-			// Call DB layer
-			eSalaryBreakDown = new EmployeeSalaryBreakDown();
-			//Call DB layer
-			eAttendance = new EmployeeAttendance();
+			eAdminAccess = aClient.getAdminAccessById(employeeid);
+			eSalaryBreakDown = aClient.getSalaryBreakDown(eAdminAccess.getDesignation());
+			eAttendance = aClient.getEmployeeAttendance(employeeid);
 			
 			calculateExperienceDesignation(eAdminAccess.getDod());
 			
@@ -83,8 +83,7 @@ public class CalculateSalaryService {
 			
 			populateEmployeeSalary(employeeid);
 			
-			//Call DB layer to save employeeSalary
-			//...
+			aClient.saveSalaryInfo(eSalary);
 			
 			attendanceService.updateUnpaidLeaves(eAttendance);
 			attendanceService.updatePaidLeaves(eAttendance);

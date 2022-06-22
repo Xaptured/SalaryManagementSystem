@@ -27,6 +27,7 @@ public class BusinessEmployeeRestController {
 	@PostMapping("/dosignup")
 	public ReturnMessage doSignUp(@RequestBody EmployeeLogin eLogin)
 	{
+		System.out.println(eLogin);
 		return eService.saveEmployeeLoginDetails(eLogin);
 	}
 	
@@ -39,6 +40,7 @@ public class BusinessEmployeeRestController {
 	@PostMapping("/dosubmitdetails")
 	public ReturnMessage doSubmitDetails(@RequestBody EmployeeDetails eDetails)
 	{
+		System.out.println(eDetails);
 		return eService.saveEmployeeDetails(eDetails);
 	}
 	

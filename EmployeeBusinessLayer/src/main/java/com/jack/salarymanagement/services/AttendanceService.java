@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.jack.salarymanagement.client.AdminClient;
 import com.jack.salarymanagement.models.EmployeeAttendance;
 import com.jack.salarymanagement.models.EmployeeDetails;
 import com.jack.salarymanagement.pojo.ReturnMessage;
@@ -18,22 +19,25 @@ public class AttendanceService {
 
 	@Autowired
 	private ReturnMessage returnMessage;
-	@SuppressWarnings("unused")
-	private Integer globalEmployeeId;
+	@Autowired
+	private AdminClient aClient;
 	
 	private EmployeeAttendance eAttendance;
 	private EmployeeDetails eDetails;
 	
-	public void setGlobalEmployeeId(Integer globalEmployeeId)
-	{
-		this.globalEmployeeId = globalEmployeeId;
-	}
-	
 	@SuppressWarnings("deprecation")
 	public ReturnMessage applyLeave()
 	{
-		//Call DB layer
-		eAttendance = new EmployeeAttendance();
+		Integer employeeid = null;
+		if(EmployeeService.getGlobalEmployeeid()!=0)
+		{
+			employeeid = EmployeeService.getGlobalEmployeeid();
+		}
+		else
+		{
+			employeeid = ValidateService.getGlobalEmployeeid();
+		}
+		eAttendance = aClient.getEmployeeAttendance(employeeid);
 		int updatedLeaves;
 		
 		try {
@@ -45,8 +49,7 @@ public class AttendanceService {
 					updatedLeaves = updatedLeaves-1;
 					eAttendance.setPaidleaves(updatedLeaves);
 					
-					//Call DB layer to save eAttendance
-					//...
+					aClient.saveEmployeeAttendance(eAttendance);
 					
 					returnMessage.setValid(true);
 					returnMessage.setMessage(StringConstants.SUCCESSFUL_PAID_LEAVES);
@@ -57,8 +60,7 @@ public class AttendanceService {
 					updatedLeaves = updatedLeaves+1;
 					eAttendance.setUnpaidleaves(updatedLeaves);
 					
-					//Call DB layer to save eAttendance
-					//...
+					aClient.saveEmployeeAttendance(eAttendance);
 					
 					returnMessage.setValid(true);
 					returnMessage.setMessage(StringConstants.SUCCESSFUL_UNPAID_LEAVES);
@@ -76,24 +78,20 @@ public class AttendanceService {
 	
 	public void updateUnpaidLeaves(EmployeeAttendance employeeAttendance)
 	{
-		// Update EmployeeAttendance Table when salary generates
 		employeeAttendance.setUnpaidleaves(0);
-		// Call DB layer to save employeeAttendance
-		//...
+		aClient.saveEmployeeAttendance(employeeAttendance);
 	}
 	
 	public void updatePaidLeaves(EmployeeAttendance employeeAttendance)
 	{
-		// Call DB layer
-		eDetails = new EmployeeDetails();
+		eDetails = aClient.getEmployeeDetails(employeeAttendance.getEmployeeid());
 		int experience = calculateExperience(eDetails.getDoj());
 		if(experience != eDetails.getExperience())
 		{
-			// Update EmployeeAttendance Table when salary generates
 			employeeAttendance.setPaidleaves(22);
 			eDetails.setExperience(experience);
-			// Call DB layer to save employeeAttendance and eDetails
-			//...
+			aClient.saveEmployeeAttendance(employeeAttendance);
+			aClient.saveEmployeeDetails(eDetails);
 		}
 	}
 	

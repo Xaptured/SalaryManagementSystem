@@ -144,7 +144,8 @@ index.html
 TODO:
 generatePaySlipbutton>>>payslip.html	
 Need to add StringConstants.java --DONE
-
+add employeedid after signup and login to session object
+AttendanceService.java >>>32
 ============================================================================================
 
 URL_NAMES:

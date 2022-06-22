@@ -21,4 +21,7 @@ public class StringConstants {
 	
 	public static final String SUCCESSFUL_PAID_LEAVES = "Successfully paid-leave applied";
 	public static final String SUCCESSFUL_UNPAID_LEAVES = "Successfully unpaid-leave applied";
+	
+	public static final String TRUE = "true";
+	public static final String FALSE = "false";
 }

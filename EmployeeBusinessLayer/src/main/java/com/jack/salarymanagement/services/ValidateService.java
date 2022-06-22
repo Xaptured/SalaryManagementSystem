@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.jack.salarymanagement.models.EmployeeLogin;
+import com.jack.salarymanagement.client.AdminClient;
+import com.jack.salarymanagement.client.EmployeeClient;
 import com.jack.salarymanagement.models.AdminLogin;
 import com.jack.salarymanagement.models.EmployeeDetails;
 import com.jack.salarymanagement.pojo.ReturnMessage;
@@ -15,12 +17,21 @@ public class ValidateService {
 
 	@Autowired
 	private ReturnMessage returnMessage;
+	@Autowired
+	private EmployeeClient eClient;
+	@Autowired
+	private AdminClient aClient;
+	
+	private static Integer globalEmployeeid=0;
+	
+	public static Integer getGlobalEmployeeid() {
+		return globalEmployeeid;
+	}
 
 	@SuppressWarnings("deprecation")
 	public ReturnMessage isValidAdminWithMessage(AdminLogin adminLogin) {
 		try {
-			// Should call DB layer
-			AdminLogin detailsFromDB = new AdminLogin();
+			AdminLogin detailsFromDB = aClient.getAdminLoginDetailsByUsername(adminLogin.getUsername());
 
 			if (!StringUtils.isEmpty(detailsFromDB)) {
 				boolean isValidAdmin = isValidAdmin(adminLogin, detailsFromDB);
@@ -52,12 +63,12 @@ public class ValidateService {
 	@SuppressWarnings("deprecation")
 	public ReturnMessage isValidEmployeeWithMessage(EmployeeLogin employeeLogin) {
 		try {
-			// Should call DB layer
-			EmployeeLogin detailsFromDB = new EmployeeLogin();
+			EmployeeLogin detailsFromDB = eClient.getEmployeeLoginByUserName(employeeLogin.getUsername());
 
 			if (!StringUtils.isEmpty(detailsFromDB)) {
 				boolean isValidEmployee = isValidEmployee(employeeLogin, detailsFromDB);
 				if (isValidEmployee) {
+					globalEmployeeid = detailsFromDB.getEmployeeid();
 					returnMessage.setValid(isValidEmployee);
 					returnMessage.setMessage(StringConstants.VALID_EMPLOYEE);
 				} else {

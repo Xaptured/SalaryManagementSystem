@@ -1,6 +1,5 @@
 package com.jack.salarymanagement.services;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.jack.salarymanagement.client.EmployeeClient;
 import com.jack.salarymanagement.models.EmployeeDetails;
 import com.jack.salarymanagement.models.EmployeeLogin;
 import com.jack.salarymanagement.pojo.ReturnMessage;
@@ -25,30 +25,32 @@ public class EmployeeService {
 	@Autowired
 	private ValidateService validateService;
 	@Autowired
-	private AttendanceService aService;
+	private EmployeeClient eClient;
+	
+	private static Integer globalEmployeeid=0;
 	
 	private EmployeeDetails detailsFromDB;
-	private Integer globalEmployeeId;
 	
+	public static Integer getGlobalEmployeeid() {
+		return globalEmployeeid;
+	}
+
 	@SuppressWarnings("deprecation")
 	public ReturnMessage saveEmployeeLoginDetails(EmployeeLogin employeeLogin) {
 		try {
-			// Should call DB layer
-			EmployeeLogin detailsFromDB = new EmployeeLogin();
+			EmployeeLogin detailsFromDB = eClient.getEmployeeLoginByUserName(employeeLogin.getUsername());
 			
 			if (StringUtils.isEmpty(detailsFromDB)) {
-				// Should call DB layer - fetchEmployeeIds()
-				List<Integer> idList = new ArrayList<>();
+				List<Integer> idList = eClient.getEmployeeIds();
 				Set<Integer> employeeSet = new HashSet<>(idList);
-
+				System.out.println(employeeSet);
 				generateID.setEmployeeIdSet(employeeSet);
-				Integer employeeID = generateID.GenerateID();
+				Integer employeeID = generateID.GenerateID(true);
+				System.out.println(employeeID);
 				employeeLogin.setEmployeeid(employeeID);
-				globalEmployeeId = employeeID;
-				aService.setGlobalEmployeeId(globalEmployeeId);
+				globalEmployeeid = employeeID;
 				
-				// Should call DB layer
-				//saveEmployee(employeeLogin);
+				eClient.saveEmployeeSignUp(employeeLogin);
 
 				returnMessage.setValid(true);
 				returnMessage.setMessage(StringConstants.SAVED_TO_DB);
@@ -66,16 +68,15 @@ public class EmployeeService {
 	public ReturnMessage saveEmployeeDetails(EmployeeDetails employeeDetails)
 	{
 		try {
-			//Should call DB layer
-			EmployeeDetails detailsFromDB = new EmployeeDetails();
+			detailsFromDB = eClient.getEmployeeDetailsById(EmployeeService.globalEmployeeid);
+			System.out.println(detailsFromDB);
 			if (!StringUtils.isEmpty(detailsFromDB)) 
 			{
 				if(validateService.validateEmployeeDetails(employeeDetails))
 				{
 					populateEmployeeDetailDB(employeeDetails);
-					
-					// Call DB layer to save detailsFromDB
-					//...
+					System.out.println(detailsFromDB);
+					eClient.saveEmployeeDetails(detailsFromDB);
 					
 					returnMessage.setValid(true);
 					returnMessage.setMessage(StringConstants.SAVED_TO_DB);

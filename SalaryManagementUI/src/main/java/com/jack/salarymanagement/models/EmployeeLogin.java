@@ -43,6 +43,10 @@ public class EmployeeLogin {
 	}
 
 	public int getEmployeeid() {
+		if(employeeid == null)
+		{
+			employeeid = 0;
+		}
 		return employeeid;
 	}
 

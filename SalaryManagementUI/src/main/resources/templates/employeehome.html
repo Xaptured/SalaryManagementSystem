@@ -31,10 +31,10 @@
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="http://localhost:8080/" style="color: white;">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="http://localhost:8080/login" style="color: white;">Employee</a>
+						aria-current="page" href="http://localhost:8082/" style="color: white;">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="http://localhost:8082/login" style="color: white;">Employee</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="http://localhost:8080/loginadmin" style="color: white;">Admin</a></li>
+					<li class="nav-item"><a class="nav-link" href="http://localhost:8082/loginadmin" style="color: white;">Admin</a></li>
 					<li class="nav-item"><a class="nav-link" href="#" style="color: white;">Contact Us</a></li>
 				</ul>
 			</div>
@@ -48,7 +48,7 @@
 				<!--  Details Start -->
 				<div class="jumbo" style="margin-top: 10%; color: white;">
 					<h1 class="display-5">Click the button to SAVE or UPDATE details.</h1>
-					<a class="btn btn-outline-light btn-lg" href="http://localhost:8080/details" role="button" style="margin-top: 10%;">
+					<a class="btn btn-outline-light btn-lg" href="http://localhost:8082/details" role="button" style="margin-top: 10%;">
 						Manage Details
 					</a>
 				</div>
@@ -70,9 +70,9 @@
 					<h1 class="display-5">Apply leave for today.</h1>
 					<p class="lead" style="margin-top: 6%;">Maximum Paid Leaves per year is 22.</p>
 					<form th:action="@{/doapplyleave}" method="post">
-					<button type="submit" class="btn btn-outline-light btn-lg">Apply Leave</button>			
+					<button type="submit" class="btn btn-outline-light btn-lg" style="margin-top: 10%;">Apply Leave</button>			
 					<!-- Alert message start-->
-   					<div th:if="${session.message}" th:classappend="${session.condition=='true'}?alert-success:alert-danger" class="alert alert-success" role="alert">
+   					<div th:if="${session.message}" style="margin-top: 3%; opacity: 0.5;">
    						<p th:text="${session.message}"></p>
    						<th:block th:text="${#session.removeAttribute('message')}"></th:block>
    					</div> 
