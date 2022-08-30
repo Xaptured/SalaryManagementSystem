@@ -262,3 +262,27 @@ public class AttributeEncryptor implements AttributeConverter<String, String> {
     private String name;
 
 =================================================================================================================
+
+{
+    "id": 1,
+    "username": "Jack",
+    "password": "123",
+    "employeeid": 1
+}
+
+=================================================================================================================
+
+Spring Security: TAG : Security-1.0
+
+	EmployeeLoginTable
+		id  ----	(PK)
+		username ---(UK)
+		password
+		employeeid
+		role--->ROLE_USER ------------------ TODO : need to be added --DONE (Both employee and admin)
+		(need to check how role is saving in DB)
+		
+		TODO : authroziation -- DONE, password encoding and authentication form change
+		need to do verification after user signup -> after that only one can login successfully.
+		After signup -> display page : wait for some time to validate the details
+

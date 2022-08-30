@@ -108,5 +108,18 @@ public class EmployeeService {
 		detailsFromDB.setPan(employeeDetails.getPan());
 		detailsFromDB.setBankacc(employeeDetails.getBankacc());
 	}
-
+	
+	public EmployeeLogin getEmployeeLoginDetails(String username)
+	{
+		EmployeeLogin detailsFromDB = null;
+		try 
+		{			
+			detailsFromDB = eClient.getEmployeeLoginByUserName(username);
+		} 
+		catch (Exception e) 
+		{
+			// log-message
+		}
+		return detailsFromDB;
+	}
 }

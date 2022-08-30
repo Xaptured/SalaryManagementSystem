@@ -49,4 +49,10 @@ public class BusinessEmployeeRestController {
 	{
 		return aService.applyLeave();
 	}
+	
+	@PostMapping("/getLoginDetails")
+	EmployeeLogin getEmployeeLoginDetails(@RequestBody String username)
+	{
+		return eService.getEmployeeLoginDetails(username);
+	}
 }

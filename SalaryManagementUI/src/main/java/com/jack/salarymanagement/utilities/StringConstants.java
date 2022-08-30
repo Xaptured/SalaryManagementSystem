@@ -24,4 +24,7 @@ public class StringConstants {
 	
 	public static final String TRUE = "true";
 	public static final String FALSE = "false";
+	
+	public static final String USER = "ROLE_USER";//Security-1.0
+	public static final String ADMIN = "ROLE_ADMIN";//Security-1.0
 }

@@ -22,4 +22,7 @@ public interface EmployeeClient {
 	
 	@PostMapping("/doapplyleave")
 	ReturnMessage doApplyLeave();
+	
+	@PostMapping("/getLoginDetails")
+	EmployeeLogin getEmployeeLoginDetails(@RequestBody String username);
 }

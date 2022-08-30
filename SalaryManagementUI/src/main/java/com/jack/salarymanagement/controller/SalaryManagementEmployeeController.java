@@ -29,14 +29,13 @@ public class SalaryManagementEmployeeController {
 	@PostMapping("/dosignup")
 	public String doSignUp(@ModelAttribute EmployeeLogin eLogin,HttpSession session)
 	{
-		//send eLogin to BusinessLayer
-		System.out.println(eLogin);
+		eLogin.setRole(StringConstants.USER);//Security-1.0
 		ReturnMessage returnMessage = eClient.doSignUp(eLogin);
 		String returnPage = null;
 		
 		if(returnMessage.isValid())
 		{
-			returnPage = "redirect:/employeehome";
+			returnPage = "redirect:/";
 		}
 		else
 		{

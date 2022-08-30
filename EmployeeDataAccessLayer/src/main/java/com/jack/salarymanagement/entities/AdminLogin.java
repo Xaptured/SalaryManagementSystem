@@ -21,16 +21,19 @@ public class AdminLogin {
 	private String password;
 	@Column(name = "secretkey")
 	private String sectretkey;
+	@Column(name = "role")
+	private String role;//Security-1.0
 
 	public AdminLogin() {
 		super();
 	}
 
-	public AdminLogin(String username, String password, String sectretkey) {
+	public AdminLogin(String username, String password, String sectretkey, String role) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.sectretkey = sectretkey;
+		this.role = role;
 	}
 
 	public int getId() {
@@ -65,9 +68,19 @@ public class AdminLogin {
 		this.sectretkey = sectretkey;
 	}
 
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	@Override
 	public String toString() {
-		return "AdminLogin [username=" + username + ", password=" + password + ", sectretkey=" + sectretkey + "]";
+		return "AdminLogin [id=" + id + ", username=" + username + ", password=" + password + ", sectretkey="
+				+ sectretkey + ", role=" + role + "]";
 	}
+	
 
 }

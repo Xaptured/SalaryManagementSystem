@@ -21,16 +21,19 @@ public class EmployeeLogin {
 	private String password;
 	@Column(name = "employeeid")
 	private Integer employeeid;
+	@Column(name = "role")
+	private String role;//Security-1.0
 
 	public EmployeeLogin() {
 		super();
 	}
 
-	public EmployeeLogin(String username, String password, int employeeid) {
+	public EmployeeLogin(String username, String password, int employeeid, String role) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.employeeid = employeeid;
+		this.role = role;
 	}
 
 	public int getId() {
@@ -65,10 +68,22 @@ public class EmployeeLogin {
 		this.employeeid = employeeid;
 	}
 
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public void setEmployeeid(Integer employeeid) {
+		this.employeeid = employeeid;
+	}
+
 	@Override
 	public String toString() {
 		return "EmployeeLogin [id=" + id + ", username=" + username + ", password=" + password + ", employeeid="
-				+ employeeid + "]";
+				+ employeeid + ", role=" + role + "]";
 	}
 
 }
