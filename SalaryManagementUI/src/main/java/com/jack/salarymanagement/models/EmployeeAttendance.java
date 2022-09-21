@@ -1,5 +1,13 @@
 package com.jack.salarymanagement.models;
 
+/**
+ * @author JACK
+ *
+ * Model Class - EmployeeAttendance
+ * Stores Employee Attendance Details
+ * 
+ * Attributes - id,employeeid,paidleaves,unpaidleaves 
+ */
 public class EmployeeAttendance {
 
 	private int id;
@@ -55,5 +63,4 @@ public class EmployeeAttendance {
 		return "EmployeeAttendance [id=" + id + ", employeeid=" + employeeid + ", paidleaves=" + paidleaves
 				+ ", unpaidleaves=" + unpaidleaves + "]";
 	}
-
 }

@@ -1,5 +1,10 @@
 package com.jack.salarymanagement.utilities;
 
+/**
+ * @author JACK
+ *
+ * Constants for Business Layer
+ */
 public class StringConstants {
 
 	public static final String VALID_ADMIN = "valid admin";
@@ -10,6 +15,7 @@ public class StringConstants {
 	public static final String EMPLOYEE_FOUND = "employee found";
 	public static final String EMPLOYEE_NOT_FOUND = "employee not found";
 	public static final String SAVED_TO_DB = "successfully added to DB";
+	public static final String SAVED_TO_DB_FAILED = "unsuccessfully added to DB";
 	public static final String UPDATED_TO_DB = "successfully updated to DB";
 	public static final String NOT_SAVED_TO_DB = "existing user";
 	public static final String DETAILS_NOT_FOUND = "Details not found";
@@ -23,10 +29,13 @@ public class StringConstants {
 	public static final String SR_MANAGER = "sr manager";
 	public static final String BUSINESS_LEAD = "business lead";
 	
-	public static final String SUCCESSFUL_PAID_LEAVES = "Successfully paid-leave applied";
-	public static final String SUCCESSFUL_UNPAID_LEAVES = "Successfully unpaid-leave applied";
+	public static final String PAID_LEAVES_SAVED= "Paid-Leaves Saved";
+	public static final String PAID_LEAVES_NOT_SAVED= "Paid-Leaves Not Saved";
+	public static final String UNPAID_LEAVES_SAVED = "Unpaid-Leaves Saved";
+	public static final String UNPAID_LEAVES_NOT_SAVED = "Unpaid-Leaves Not Saved";
 	
-	public static final String SALARY_CALCULATED = "Salary calculated";
+	public static final String SALARY_SAVED = "Salary Saved";
+	public static final String SALARY_NOT_SAVED = "Salary Not Saved";
 	public static final String SALARY_NOT_CALCULATED = "Salary not calculated";
 	
 }

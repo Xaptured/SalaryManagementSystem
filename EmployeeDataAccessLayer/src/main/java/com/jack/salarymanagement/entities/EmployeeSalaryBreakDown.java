@@ -7,6 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * @author JACK
+ *
+ * Entity Class - EmployeeSalaryBreakDown
+ * Stores Employee Salary Breakdown Details
+ * 
+ * Attributes - id,designation,basicsalary,increment,rent,conveyance,medical,specialpay,bonus,wfh
+ */
 @Entity
 @Table(name = "salary_breakdown")
 public class EmployeeSalaryBreakDown {

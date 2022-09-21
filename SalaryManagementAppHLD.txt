@@ -61,7 +61,7 @@ EmployeeAdminAccessTable : add doj in object before saving in EmployeeLoginServi
 Move some files from DB layer to business layer -DONE
 
 --Enhancement--
-1.Encrypt data in DB layer
+1.Encrypt data in DB layer -- FUTURE
 ===================================================================================================
 
 
@@ -282,7 +282,31 @@ Spring Security: TAG : Security-1.0
 		role--->ROLE_USER ------------------ TODO : need to be added --DONE (Both employee and admin)
 		(need to check how role is saving in DB)
 		
-		TODO : authroziation -- DONE, password encoding and authentication form change
-		need to do verification after user signup -> after that only one can login successfully.
-		After signup -> display page : wait for some time to validate the details
+		TODO : authroziation -- DONE
+		password encoding -- not required
+		authentication form change -- DONE
+		need to do verification after user signup -> after that only one can login successfully. -- FUTURE 
+		After signup -> display page : wait for some time to validate the details -- FUTURE
 
+=================================================================================================================
+
+JWT;https://www.javainuse.com/spring/boot-jwt
+
+=================================================================================================================
+
+need to add loggers and comments - 
+
+TODO:
+Need to change SignUp logic ... Only login will be applied to employee --- FUTURE
+check apply Leave (Testing Required)---CustomAuthenticationFilter
+how to throw exception from one micro to other micro
+Exception handling In DB rest controllers -- DONE
+CalculateSalaryService >>>58>>97 -- DONE
+AttendantService >>>118 -- DONE
+
+
+=================================================================================================================
+
+Deployment
+
+=================================================================================================================

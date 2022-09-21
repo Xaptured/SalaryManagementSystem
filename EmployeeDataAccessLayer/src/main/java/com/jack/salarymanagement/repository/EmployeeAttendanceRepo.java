@@ -5,6 +5,11 @@ import org.springframework.stereotype.Repository;
 
 import com.jack.salarymanagement.entities.EmployeeAttendance;
 
+/**
+ * @author JACK
+ *
+ * Repository Interface - EmployeeAttendanceRepo
+ */
 @Repository
 public interface EmployeeAttendanceRepo extends JpaRepository<EmployeeAttendance, Integer> {
 

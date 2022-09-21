@@ -7,15 +7,35 @@ import com.jack.salarymanagement.entities.EmployeeSalary;
 import com.jack.salarymanagement.repository.EmployeeSalaryRepo;
 import com.jack.salarymanagement.utilities.EmployeeSalaryInfoDataAccessUtilities;
 
+/**
+ * @author JACK
+ *
+ * Service class - EmployeeSalaryInfoService
+ * Non JavaDoc Methods are unused
+ */
 @Service
 public class EmployeeSalaryInfoService implements EmployeeSalaryInfoDataAccessUtilities {
 
 	@Autowired
 	private EmployeeSalaryRepo repo;
 	
+	/**
+	 * Save Employee Salary Details
+	 * 
+	 * @param employeeSalary
+	 * @return eSalary
+	 * @throws Exception
+	 */
 	@Override
-	public EmployeeSalary savEmployeeSalary(EmployeeSalary employeeSalary) {
-		return repo.save(employeeSalary);
+	public EmployeeSalary savEmployeeSalary(EmployeeSalary employeeSalary) throws Exception{
+		EmployeeSalary eSalary = null;
+		try {
+			eSalary = repo.save(employeeSalary);
+		}
+		catch (Exception e) {
+			throw new Exception();
+		}
+		return eSalary;
 	}
 
 	@Override

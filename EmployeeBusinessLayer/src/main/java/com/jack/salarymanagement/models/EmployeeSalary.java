@@ -4,6 +4,14 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * @author JACK
+ *
+ * Model Class - EmployeeSalary
+ * Stores and Autowire Employee Salary Details
+ * 
+ * Attributes - id,employeeid,dateodcredit,salarycredit
+ */
 @Component
 public class EmployeeSalary {
 
@@ -60,5 +68,4 @@ public class EmployeeSalary {
 		return "EmployeeSalary [id=" + id + ", employeeid=" + employeeid + ", dateOfCredit=" + dateOfCredit
 				+ ", salarycredit=" + salarycredit + "]";
 	}
-
 }

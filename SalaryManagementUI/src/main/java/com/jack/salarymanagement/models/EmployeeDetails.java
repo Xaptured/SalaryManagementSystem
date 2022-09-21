@@ -2,6 +2,14 @@ package com.jack.salarymanagement.models;
 
 import java.sql.Date;
 
+/**
+ * @author JACK
+ *
+ * Model Class - EmployeeDetails
+ * Stores Employee Details
+ * 
+ * Attributes - id,employeeid,name,mail,phno,location,pan,bankacc,doj,experience 
+ */
 public class EmployeeDetails {
 
 	private int id;
@@ -119,5 +127,4 @@ public class EmployeeDetails {
 				+ ", phno=" + phno + ", location=" + location + ", pan=" + pan + ", bankacc=" + bankacc + ", doj=" + doj
 				+ ", experience=" + experience + "]";
 	}
-
 }

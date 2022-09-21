@@ -2,6 +2,14 @@ package com.jack.salarymanagement.models;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * @author JACK
+ *
+ * Model Class - EmployeeSalaryBreakDown
+ * Stores Employee Salary Breakdown Details
+ * 
+ * Attributes - id,designation,basicsalary,increment,rent,conveyance,medical,specialpay,bonus,wfh
+ */
 @Component
 public class EmployeeSalaryBreakDown {
 
@@ -118,5 +126,4 @@ public class EmployeeSalaryBreakDown {
 				+ ", increment=" + increment + ", rent=" + rent + ", conveyance=" + conveyance + ", medical=" + medical
 				+ ", specialPay=" + specialPay + ", bonus=" + bonus + ", wfh=" + wfh + "]";
 	}
-
 }

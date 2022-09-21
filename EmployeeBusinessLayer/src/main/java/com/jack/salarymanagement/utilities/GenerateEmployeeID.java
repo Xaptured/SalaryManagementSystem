@@ -4,8 +4,15 @@ import java.util.Random;
 import java.util.Set;
 
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
-//Move to BusinessLayer
+
+/**
+ * @author JACK
+ *
+ * Ultility class - GenerateEmployeeID
+ * Generation of Employee ID
+ */
 @Component
 public class GenerateEmployeeID {
 
@@ -20,11 +27,22 @@ public class GenerateEmployeeID {
 		this.employeeIdSet = employeeIdSet;
 	}
 
+	/**
+	 * Generate random employee id
+	 * 
+	 * @param condition
+	 * @return
+	 */
+	@SuppressWarnings("deprecation")
 	public int GenerateID(boolean condition) {
 		Random randomObj = new Random();
 		while (condition) {
 			randomNumber = randomObj.nextInt(1000);
-			if (!employeeIdSet.contains(randomNumber)) {
+			if(StringUtils.isEmpty(employeeIdSet))
+			{
+				condition = false;
+			}
+			else if (!employeeIdSet.contains(randomNumber)) {
 				condition = false;
 			}
 		}

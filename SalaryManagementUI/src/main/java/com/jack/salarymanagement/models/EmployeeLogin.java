@@ -1,5 +1,13 @@
 package com.jack.salarymanagement.models;
 
+/**
+ * @author JACK
+ *
+ * Model Class - EmployeeLogin
+ * Stores Employee Login Details
+ * 
+ * Attributes - id,username,password,employeeid,role
+ */
 public class EmployeeLogin {
 
 	private int id;
@@ -72,5 +80,4 @@ public class EmployeeLogin {
 		return "EmployeeLogin [id=" + id + ", username=" + username + ", password=" + password + ", employeeid="
 				+ employeeid + ", role=" + role + "]";
 	}
-
 }

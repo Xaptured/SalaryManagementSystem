@@ -4,6 +4,14 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * @author JACK
+ *
+ * Model Class - EmployeeDetails
+ * Stores and Autowire Employee Details
+ * 
+ * Attributes - id,employeeid,name,mail,phno,location,pan,bankacc,doj,experience 
+ */
 @Component
 public class EmployeeDetails {
 
@@ -122,5 +130,4 @@ public class EmployeeDetails {
 				+ ", phno=" + phno + ", location=" + location + ", pan=" + pan + ", bankacc=" + bankacc + ", doj=" + doj
 				+ ", experience=" + experience + "]";
 	}
-
 }

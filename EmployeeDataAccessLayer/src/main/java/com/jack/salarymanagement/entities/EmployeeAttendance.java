@@ -13,6 +13,14 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author JACK
+ *
+ * Entity Class - EmployeeAttendance
+ * Stores Employee Attendance Details
+ * 
+ * Attributes - id,employeeid,paidleaves,unpaidleaves 
+ */
 @SuppressWarnings("serial")
 @Entity
 @Component

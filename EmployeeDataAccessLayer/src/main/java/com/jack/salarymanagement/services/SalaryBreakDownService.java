@@ -7,6 +7,12 @@ import com.jack.salarymanagement.entities.EmployeeSalaryBreakDown;
 import com.jack.salarymanagement.repository.SalaryBreakDownRepo;
 import com.jack.salarymanagement.utilities.EmployeeSalaryDataAccessUtilities;
 
+/**
+ * @author JACK
+ *
+ * Service class - SalaryBreakDownService
+ * Non JavaDoc Methods are unused
+ */
 @Service
 public class SalaryBreakDownService implements EmployeeSalaryDataAccessUtilities {
 
@@ -18,9 +24,24 @@ public class SalaryBreakDownService implements EmployeeSalaryDataAccessUtilities
 		return repo.save(salaryBreakDown);
 	}
 
+	/**
+	 * Fetch Salary Breakdown Details
+	 * 
+	 * @param designation
+	 * @return eSalaryBreakDown
+	 * @throws Exception
+	 */
 	@Override
-	public EmployeeSalaryBreakDown fetchSalaryBreakDown(String designation) {
-		return repo.findByDesignation(designation);
+	public EmployeeSalaryBreakDown fetchSalaryBreakDown(String designation) throws Exception
+	{
+		EmployeeSalaryBreakDown eSalaryBreakDown = null;	
+		try {
+			eSalaryBreakDown = repo.findByDesignation(designation);
+		} 
+		catch (Exception e) {
+			throw new Exception();
+		}
+		return eSalaryBreakDown;
 	}
 
 	@Override

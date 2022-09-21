@@ -5,6 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import com.jack.salarymanagement.entities.AdminLogin;
 
+
+/**
+ * @author JACK
+ *
+ * Repository Interface - AdminLoginRepo
+ */
 @Repository
 public interface AdminLoginRepo extends JpaRepository<AdminLogin, Integer> {
 

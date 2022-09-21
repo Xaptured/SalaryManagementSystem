@@ -54,7 +54,7 @@
     						<th:block th:text="${#session.removeAttribute('message')}"></th:block>
     					</div> 
     					<!-- Alert message end-->
-    					<form th:action="@{/dologin}" th:object="${eLogin}" method=post>
+    					<form th:action="@{/login}" th:object="${authenticationRequest}" method=post>
 						  <div class="mb-4">
 						    <label for="username" class="form-label">User Name</label>
 						    <input type="text" class="form-control" placeholder="Enter User Name" name="username" id="username">

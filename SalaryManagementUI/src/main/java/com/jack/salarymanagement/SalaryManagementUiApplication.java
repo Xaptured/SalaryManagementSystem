@@ -11,5 +11,4 @@ public class SalaryManagementUiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SalaryManagementUiApplication.class, args);
 	}
-
 }

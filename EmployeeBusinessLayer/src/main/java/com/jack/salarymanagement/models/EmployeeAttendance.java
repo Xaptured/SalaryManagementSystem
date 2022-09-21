@@ -2,6 +2,14 @@ package com.jack.salarymanagement.models;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * @author JACK
+ *
+ * Model Class - EmployeeAttendance
+ * Stores and Autowire Employee Attendance Details
+ * 
+ * Attributes - id,employeeid,paidleaves,unpaidleaves 
+ */
 @Component
 public class EmployeeAttendance {
 
@@ -58,5 +66,4 @@ public class EmployeeAttendance {
 		return "EmployeeAttendance [id=" + id + ", employeeid=" + employeeid + ", paidleaves=" + paidleaves
 				+ ", unpaidleaves=" + unpaidleaves + "]";
 	}
-
 }

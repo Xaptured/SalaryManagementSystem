@@ -8,6 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import com.jack.salarymanagement.entities.EmployeeLogin;
 
+/**
+ * @author JACK
+ *
+ * Repository Interface - EmployeeLoginRepo
+ */
 @Repository
 public interface EmployeeLoginRepo extends JpaRepository<EmployeeLogin, Integer> {
 

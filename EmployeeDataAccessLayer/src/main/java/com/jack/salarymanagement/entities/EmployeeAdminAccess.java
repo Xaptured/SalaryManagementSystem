@@ -14,8 +14,15 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author JACK
+ *
+ * Entity Class - EmployeeAdminAccess
+ * Stores Employee Designation Details set by the Admin
+ * 
+ * Attributes - id,employeeid,dod,designation 
+ */
 @SuppressWarnings("serial")
-
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Entity

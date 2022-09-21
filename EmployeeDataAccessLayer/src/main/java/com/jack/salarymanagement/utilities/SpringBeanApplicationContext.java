@@ -5,6 +5,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author JACK
+ *
+ * Application Context to get Required Bean
+ */
 @Component
 public class SpringBeanApplicationContext implements ApplicationContextAware {
 

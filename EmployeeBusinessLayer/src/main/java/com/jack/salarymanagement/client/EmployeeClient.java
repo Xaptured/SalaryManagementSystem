@@ -12,6 +12,11 @@ import com.jack.salarymanagement.models.EmployeeAttendance;
 import com.jack.salarymanagement.models.EmployeeDetails;
 import com.jack.salarymanagement.models.EmployeeLogin;
 
+/**
+ * @author JACK
+ *
+ * Client Interface - calls DataBase Layer Employee APIs
+ */
 @FeignClient(name = "employee-db-service",url = "http://localhost:8080/employee")
 public interface EmployeeClient {
 

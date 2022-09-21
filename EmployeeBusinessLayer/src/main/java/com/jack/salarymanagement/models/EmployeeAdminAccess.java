@@ -4,6 +4,14 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * @author JACK
+ *
+ * Model Class - EmployeeAdminAccess
+ * Stores and Autowire Employee Designation Details set by the Admin
+ * 
+ * Attributes - id,employeeid,dod,designation 
+ */
 @Component
 public class EmployeeAdminAccess {
 
@@ -60,5 +68,4 @@ public class EmployeeAdminAccess {
 		return "EmployeeAdminAccess [id=" + id + ", employeeid=" + employeeid + ", dod=" + dod + ", designation="
 				+ designation + "]";
 	}
-
 }

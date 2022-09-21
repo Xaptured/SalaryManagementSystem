@@ -2,6 +2,14 @@ package com.jack.salarymanagement.models;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * @author JACK
+ *
+ * Model Class - EmployeeLogin
+ * Stores and Autowire Employee Login Details
+ * 
+ * Attributes - id,username,password,employeeid,role
+ */
 @Component
 public class EmployeeLogin {
 
@@ -72,7 +80,4 @@ public class EmployeeLogin {
 		return "EmployeeLogin [id=" + id + ", username=" + username + ", password=" + password + ", employeeid="
 				+ employeeid + ", role=" + role + "]";
 	}
-	
-	
-
 }

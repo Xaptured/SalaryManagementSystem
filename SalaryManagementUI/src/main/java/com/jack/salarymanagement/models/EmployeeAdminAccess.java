@@ -2,6 +2,14 @@ package com.jack.salarymanagement.models;
 
 import java.sql.Date;
 
+/**
+ * @author JACK
+ *
+ * Model Class - EmployeeAdminAccess
+ * Stores Employee Designation Details set by the Admin
+ * 
+ * Attributes - id,employeeid,dod,designation 
+ */
 public class EmployeeAdminAccess {
 
 	private int id;
@@ -57,5 +65,4 @@ public class EmployeeAdminAccess {
 		return "EmployeeAdminAccess [id=" + id + ", employeeid=" + employeeid + ", dod=" + dod + ", designation="
 				+ designation + "]";
 	}
-
 }

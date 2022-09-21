@@ -1,8 +1,13 @@
 package com.jack.salarymanagement.pojo;
 
-import org.springframework.stereotype.Component;
-
-@Component
+/**
+ * @author JACK
+ *
+ * POJO class - ReturnMessage
+ * Stores message to display on the UI
+ * 
+ * Attributes - valid,message
+ */
 public class ReturnMessage {
 
 	private boolean valid;
@@ -38,5 +43,4 @@ public class ReturnMessage {
 	public String toString() {
 		return "ReturnMessage [valid=" + valid + ", message=" + message + "]";
 	}
-
 }

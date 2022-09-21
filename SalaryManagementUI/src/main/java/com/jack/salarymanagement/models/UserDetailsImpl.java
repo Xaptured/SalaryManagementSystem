@@ -7,6 +7,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+/**
+ * @author JACK
+ *
+ * UserDetails Class - UserDetailsImpl
+ * Stores Login Details for Employee- Applied to Employee - Security
+ * 
+ * Attributes - username,password,role
+ */
 @SuppressWarnings("serial")
 public class UserDetailsImpl implements UserDetails {
 

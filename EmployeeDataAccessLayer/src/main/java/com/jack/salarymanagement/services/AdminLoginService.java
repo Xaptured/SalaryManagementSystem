@@ -7,6 +7,12 @@ import com.jack.salarymanagement.entities.AdminLogin;
 import com.jack.salarymanagement.repository.AdminLoginRepo;
 import com.jack.salarymanagement.utilities.AdminLoginDataAccessUtilities;
 
+/**
+ * @author JACK
+ *
+ * Service class - AdminLoginService
+ * Non JavaDoc Methods are unused
+ */
 @Service
 public class AdminLoginService implements AdminLoginDataAccessUtilities {
 
@@ -18,9 +24,23 @@ public class AdminLoginService implements AdminLoginDataAccessUtilities {
 		return repo.save(adminLogin);
 	}
 
+	/**
+	 * Fetch Admin Details
+	 * 
+	 * @param username
+	 * @return adminLogin
+	 * @throws Exception
+	 */
 	@Override
-	public AdminLogin fetchAdmin(String username) {
-		return repo.findByUsername(username);
+	public AdminLogin fetchAdmin(String username) throws Exception {
+		AdminLogin adminLogin = null;
+		try {
+			adminLogin = repo.findByUsername(username);
+		} 
+		catch (Exception e) {
+			throw new Exception();
+		}
+		return adminLogin;
 	}
 
 	@Override

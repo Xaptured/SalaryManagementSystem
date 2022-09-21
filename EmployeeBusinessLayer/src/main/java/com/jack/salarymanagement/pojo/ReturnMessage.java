@@ -2,6 +2,14 @@ package com.jack.salarymanagement.pojo;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * @author JACK
+ *
+ * POJO class - ReturnMessage
+ * Stores message - send back to UI layer 
+ * 
+ * Attributes - valid,message
+ */
 @Component
 public class ReturnMessage {
 

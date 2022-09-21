@@ -1,5 +1,10 @@
 package com.jack.salarymanagement.utilities;
 
+/**
+ * @author JACK
+ *
+ * Constants for UI Layer
+ */
 public class StringConstants {
 
 	public static final String CHOOSE_DESIGNATION = "Choose Designation";
@@ -27,4 +32,22 @@ public class StringConstants {
 	
 	public static final String USER = "ROLE_USER";//Security-1.0
 	public static final String ADMIN = "ROLE_ADMIN";//Security-1.0
+	public static final String USERNAME = "username";
+	public static final String PASSWORD = "password";
+	public static final String AUTHORIZATION = "Authorization";
+	public static final String BEARER = "Bearer:";
+	public static final String SECRET = "secret";
+	
+	public static final String CSS = "/css/";
+	public static final String IMAGES = "/images/";
+	public static final String SLASH = "/";
+	public static final String SIGNUP = "/signup";
+	public static final String DOSIGNUP = "/dosignup";
+	public static final String LOGIN = "/login";
+	public static final String EMPLOYEEHOME = "/employeehome";
+	public static final String ADMINHOME = "/adminhome";
+	
+	
+	
+			
 }

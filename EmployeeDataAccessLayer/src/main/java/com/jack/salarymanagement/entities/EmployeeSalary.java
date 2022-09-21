@@ -9,6 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * @author JACK
+ *
+ * Entity Class - EmployeeSalary
+ * Stores Employee Salary Details
+ * 
+ * Attributes - id,employeeid,dateodcredit,salarycredit
+ */
 @Entity
 @Table(name = "employee_salary")
 public class EmployeeSalary {

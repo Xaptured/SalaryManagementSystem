@@ -7,6 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * @author JACK
+ *
+ * Entity Class - EmployeeLogin
+ * Stores Employee Login Details
+ * 
+ * Attributes - id,username,password,employeeid,role
+ */
 @Entity
 @Table(name = "employee_login")
 public class EmployeeLogin {

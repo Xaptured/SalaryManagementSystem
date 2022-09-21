@@ -13,6 +13,11 @@ import com.jack.salarymanagement.models.EmployeeDetails;
 import com.jack.salarymanagement.models.EmployeeSalary;
 import com.jack.salarymanagement.models.EmployeeSalaryBreakDown;
 
+/**
+ * @author JACK
+ *
+ * Client Interface - calls DataBase Layer Admin APIs
+ */
 @FeignClient(name="admin-db-service",url="http://localhost:8080/admin")
 public interface AdminClient {
 
@@ -23,7 +28,7 @@ public interface AdminClient {
 	EmployeeAdminAccess getAdminAccessById(@PathVariable Integer employeeid);
 	
 	@PostMapping("/adminaccess")
-	void saveAdminAccess(@RequestBody EmployeeAdminAccess eAdminAccess);
+	EmployeeAdminAccess saveAdminAccess(@RequestBody EmployeeAdminAccess eAdminAccess);
 	
 	@GetMapping("/salarybreakdown/{designation}")
 	EmployeeSalaryBreakDown getSalaryBreakDown(@PathVariable String designation);
@@ -32,10 +37,10 @@ public interface AdminClient {
 	EmployeeAttendance getEmployeeAttendance(@PathVariable Integer employeeid);
 	
 	@PostMapping("/salary")
-	void saveSalaryInfo(@RequestBody EmployeeSalary eSalary);
+	EmployeeSalary saveSalaryInfo(@RequestBody EmployeeSalary eSalary);
 	
 	@PostMapping("/attendance")
-	void saveEmployeeAttendance(@RequestBody EmployeeAttendance eAttendance);
+	EmployeeAttendance saveEmployeeAttendance(@RequestBody EmployeeAttendance eAttendance);
 	
 	@GetMapping("/details/{employeeid}")
 	EmployeeDetails getEmployeeDetails(@PathVariable Integer employeeid);
