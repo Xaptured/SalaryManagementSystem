@@ -294,11 +294,11 @@ JWT;https://www.javainuse.com/spring/boot-jwt
 
 =================================================================================================================
 
-need to add loggers and comments - 
+need to add loggers and comments -- DONE
 
 TODO:
 Need to change SignUp logic ... Only login will be applied to employee --- FUTURE
-check apply Leave (Testing Required)---CustomAuthenticationFilter
+check apply Leave (Testing Required)---CustomAuthenticationFilter -- BUG
 how to throw exception from one micro to other micro
 Exception handling In DB rest controllers -- DONE
 CalculateSalaryService >>>58>>97 -- DONE
